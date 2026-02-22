@@ -44,6 +44,8 @@ chmod +x install.sh
 
 This symlinks the agent into `~/.claude/agents/` and the skill into `~/.claude/skills/`.
 
+> **Note:** Choose one install method. If the oracle plugin (Option A) is installed, it claims the `oracle` namespace and the `/oracle` local skill from Option B will not be recognized. Use `/oracle:ask` with the plugin, or `/oracle` with the standalone script — not both.
+
 ## Usage
 
 ### As a Skill
