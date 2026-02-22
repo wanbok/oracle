@@ -6,8 +6,8 @@
     "name": "Wanbok Choi",
     "url": "https://github.com/wanbok"
   },
-  "repository": "https://github.com/wanbok/claude-oracle",
-  "homepage": "https://github.com/wanbok/claude-oracle",
+  "repository": "https://github.com/wanbok/oracle",
+  "homepage": "https://github.com/wanbok/oracle",
   "license": "MIT",
   "keywords": [
     "cross-model",

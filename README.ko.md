@@ -1,4 +1,4 @@
-# claude-oracle
+# oracle
 
 [Claude Code](https://claude.com/claude-code)를 위한 크로스 모델 검증 도구. Claude와 [Codex (GPT-5.3)](https://github.com/openai/codex)를 연결하여 코드 리뷰, 대안 구현, 아키텍처 검증에 대한 세컨드 오피니언을 받습니다.
 
@@ -20,8 +20,8 @@ npm install -g @openai/codex
 ## 설치
 
 ```bash
-git clone https://github.com/wanbok/claude-oracle.git
-cd claude-oracle
+git clone https://github.com/wanbok/oracle.git
+cd oracle
 chmod +x install.sh
 ./install.sh
 ```

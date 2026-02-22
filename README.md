@@ -1,4 +1,4 @@
-# claude-oracle
+# oracle
 
 Cross-model verification for [Claude Code](https://claude.com/claude-code). Bridges Claude with [Codex (GPT-5.3)](https://github.com/openai/codex) to get second opinions on code reviews, alternative implementations, and architectural decisions.
 
@@ -20,8 +20,8 @@ npm install -g @openai/codex
 ## Install
 
 ```bash
-git clone https://github.com/wanbok/claude-oracle.git
-cd claude-oracle
+git clone https://github.com/wanbok/oracle.git
+cd oracle
 chmod +x install.sh
 ./install.sh
 ```

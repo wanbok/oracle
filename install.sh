@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CLAUDE_DIR="${HOME}/.claude"
 
-echo "Installing claude-oracle..."
+echo "Installing oracle..."
 
 # Check prerequisites
 if ! command -v codex &> /dev/null; then

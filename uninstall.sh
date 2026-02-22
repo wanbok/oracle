@@ -3,7 +3,7 @@ set -euo pipefail
 
 CLAUDE_DIR="${HOME}/.claude"
 
-echo "Uninstalling claude-oracle..."
+echo "Uninstalling oracle..."
 
 rm -f "${CLAUDE_DIR}/agents/oracle.md"
 echo "  Removed agent: oracle.md"
