@@ -19,7 +19,7 @@ fi
 
 # Install agent
 mkdir -p "${CLAUDE_DIR}/agents"
-ln -sf "${SCRIPT_DIR}/standalone/oracle.md" "${CLAUDE_DIR}/agents/oracle.md"
+ln -sf "${SCRIPT_DIR}/agents/oracle.md" "${CLAUDE_DIR}/agents/oracle.md"
 echo "  Linked agent: oracle.md"
 
 # Install skill (/oracle)
