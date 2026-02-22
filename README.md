@@ -19,6 +19,22 @@ npm install -g @openai/codex
 
 ## Install
 
+### Option A: Plugin (recommended)
+
+Install via [Claude Code plugin system](https://docs.anthropic.com/en/docs/claude-code/plugins). Provides `/oracle:ask`.
+
+```bash
+# Add marketplace
+/plugin marketplace add wanbok/claude-marketplace
+
+# Install plugin
+/plugin install oracle@wanbok-claude-marketplace
+```
+
+### Option B: Standalone script
+
+Clone and run the install script. Provides `/oracle` skill + `oracle` agent.
+
 ```bash
 git clone https://github.com/wanbok/oracle.git
 cd oracle
@@ -26,9 +42,18 @@ chmod +x install.sh
 ./install.sh
 ```
 
-This symlinks the agent into your `~/.claude/agents/` directory.
+This symlinks the agent into `~/.claude/agents/` and the skill into `~/.claude/skills/`.
 
 ## Usage
+
+### As a Skill
+
+```
+/oracle Review this function for edge cases
+/oracle:ask Review this function for edge cases   # plugin install
+```
+
+Both invoke the same 5-step workflow: parse → gather context → call Codex → quality check → report.
 
 ### As a Custom Agent
 

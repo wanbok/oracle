@@ -19,6 +19,22 @@ npm install -g @openai/codex
 
 ## 설치
 
+### 방법 A: 플러그인 (권장)
+
+[Claude Code 플러그인 시스템](https://docs.anthropic.com/en/docs/claude-code/plugins)으로 설치. `/oracle:ask` 사용 가능.
+
+```bash
+# 마켓플레이스 추가
+/plugin marketplace add wanbok/claude-marketplace
+
+# 플러그인 설치
+/plugin install oracle@wanbok-claude-marketplace
+```
+
+### 방법 B: 스크립트 설치
+
+레포를 클론하고 설치 스크립트 실행. `/oracle` 스킬 + `oracle` 에이전트 사용 가능.
+
 ```bash
 git clone https://github.com/wanbok/oracle.git
 cd oracle
@@ -26,9 +42,18 @@ chmod +x install.sh
 ./install.sh
 ```
 
-`~/.claude/agents/` 디렉토리에 에이전트를 심링크로 설치합니다.
+`~/.claude/agents/`에 에이전트를, `~/.claude/skills/`에 스킬을 심링크로 설치합니다.
 
 ## 사용법
+
+### 스킬로 사용
+
+```
+/oracle 이 함수의 엣지 케이스를 리뷰해줘
+/oracle:ask 이 함수의 엣지 케이스를 리뷰해줘   # 플러그인 설치 시
+```
+
+둘 다 동일한 5단계 워크플로우를 실행합니다: 파싱 → 컨텍스트 수집 → Codex 호출 → 품질 검증 → 보고.
 
 ### 커스텀 에이전트로 사용
 
