@@ -2,7 +2,7 @@
 
 [Claude Code](https://claude.com/claude-code)向けのクロスモデル検証ツール。Claudeと[Codex (GPT-5.3)](https://github.com/openai/codex)を連携し、コードレビュー、代替実装、アーキテクチャ検証のセカンドオピニオンを取得します。
 
-[한국어](README.md) | [English](README.en.md)
+[한국어](README.md) | [English](README.en.md) | [Tiếng Việt](README.vi.md)
 
 ## なぜ必要？
 

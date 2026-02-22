@@ -2,7 +2,7 @@
 
 Cross-model verification for [Claude Code](https://claude.com/claude-code). Bridges Claude with [Codex (GPT-5.3)](https://github.com/openai/codex) to get second opinions on code reviews, alternative implementations, and architectural decisions.
 
-[한국어](README.md) | [日本語](README.ja.md)
+[한국어](README.md) | [日本語](README.ja.md) | [Tiếng Việt](README.vi.md)
 
 ## Why?
 
