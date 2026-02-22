@@ -26,19 +26,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
-`~/.claude/` 디렉토리에 에이전트와 스킬을 심링크로 설치합니다.
+`~/.claude/agents/` 디렉토리에 에이전트를 심링크로 설치합니다.
 
 ## 사용법
-
-### 스킬로 사용 (`/ask-oracle`)
-
-Claude Code에서 바로 크로스 모델 검증:
-
-```
-/ask-oracle 이 함수에 메모리 누수가 있는지 검토해줘
-/ask-oracle 이 정렬 로직을 더 효율적으로 구현하는 방법은?
-/ask-oracle 이 API 설계의 트레이드오프를 평가해줘
-```
 
 ### 커스텀 에이전트로 사용
 
@@ -82,7 +72,7 @@ Oracle은 **읽기 전용**입니다 — 파일을 수정하지 않습니다. �
 
 ## 백엔드 설정
 
-기본값은 [Codex CLI](https://github.com/openai/codex)이지만, 에이전트/스킬 파일의 `codex exec` 명령을 수정하여 다른 백엔드로 교체할 수 있습니다.
+기본값은 [Codex CLI](https://github.com/openai/codex)이지만, `agents/oracle.md`의 `codex exec` 명령을 수정하여 다른 백엔드로 교체할 수 있습니다.
 
 | 백엔드 | 명령어 | 비고 |
 |--------|--------|------|
@@ -91,9 +81,7 @@ Oracle은 **읽기 전용**입니다 — 파일을 수정하지 않습니다. �
 | **OpenRouter** | `curl`로 OpenRouter API 호출 | 다중 모델 접근, 종량제 |
 | **Google Gemini** | `gemini "prompt"` | Google AI API 키 필요 |
 
-백엔드를 변경하려면 아래 파일의 `codex exec` 패턴을 교체하세요:
-- `agents/oracle.md` — "How to Call Codex" 섹션
-- `skills/ask-oracle/SKILL.md` — "Construct and Send Codex Prompt" 단계
+백엔드를 변경하려면 `agents/oracle.md`의 "How to Call Codex" 섹션에서 `codex exec` 패턴을 교체하세요.
 
 ## 제거
 

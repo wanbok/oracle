@@ -22,15 +22,9 @@ mkdir -p "${CLAUDE_DIR}/agents"
 ln -sf "${SCRIPT_DIR}/agents/oracle.md" "${CLAUDE_DIR}/agents/oracle.md"
 echo "  Linked agent: oracle.md"
 
-# Install skill
-mkdir -p "${CLAUDE_DIR}/skills/ask-oracle"
-ln -sf "${SCRIPT_DIR}/skills/ask-oracle/SKILL.md" "${CLAUDE_DIR}/skills/ask-oracle/SKILL.md"
-echo "  Linked skill: ask-oracle"
-
 echo ""
 echo "Done! Oracle is ready to use."
 echo ""
 echo "Usage:"
-echo "  Skill:  Type '/ask-oracle' in Claude Code"
 echo "  Agent:  Use 'oracle' as a subagent_type in Task tool"
 echo "  Team:   Add 'oracle' role to your agent team"

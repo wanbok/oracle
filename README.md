@@ -26,19 +26,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
-This symlinks the agent and skill into your `~/.claude/` directory.
+This symlinks the agent into your `~/.claude/agents/` directory.
 
 ## Usage
-
-### As a Skill (`/ask-oracle`)
-
-Use directly in Claude Code for one-off cross-model verification:
-
-```
-/ask-oracle Review this function for potential memory leaks
-/ask-oracle What's a better way to implement this sorting logic?
-/ask-oracle Evaluate the trade-offs of this API design
-```
 
 ### As a Custom Agent
 
@@ -82,7 +72,7 @@ Oracle is **read-only** — it never edits your files. It only suggests; you dec
 
 ## Backend Configuration
 
-Oracle uses [Codex CLI](https://github.com/openai/codex) by default, but you can swap the backend by editing the `codex exec` command in the agent/skill files.
+Oracle uses [Codex CLI](https://github.com/openai/codex) by default, but you can swap the backend by editing the `codex exec` command in `agents/oracle.md`.
 
 | Backend | Command | Notes |
 |---------|---------|-------|
@@ -91,9 +81,7 @@ Oracle uses [Codex CLI](https://github.com/openai/codex) by default, but you can
 | **OpenRouter** | `curl` to OpenRouter API | Multi-model access, pay-per-use |
 | **Google Gemini** | `gemini "prompt"` | Requires Google AI API key |
 
-To switch backends, replace the `codex exec` pattern in:
-- `agents/oracle.md` — the "How to Call Codex" section
-- `skills/ask-oracle/SKILL.md` — the "Construct and Send Codex Prompt" step
+To switch backends, replace the `codex exec` pattern in `agents/oracle.md` — the "How to Call Codex" section.
 
 ## Uninstall
 
