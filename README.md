@@ -1,39 +1,39 @@
 # oracle
 
-Cross-model verification for [Claude Code](https://claude.com/claude-code). Bridges Claude with [Codex (GPT-5.3)](https://github.com/openai/codex) to get second opinions on code reviews, alternative implementations, and architectural decisions.
+[Claude Code](https://claude.com/claude-code)를 위한 크로스 모델 검증 도구. Claude와 [Codex (GPT-5.3)](https://github.com/openai/codex)를 연결하여 코드 리뷰, 대안 구현, 아키텍처 검증에 대한 세컨드 오피니언을 받습니다.
 
-[한국어](README.ko.md)
+[English](README.en.md) | [日本語](README.ja.md)
 
-## Why?
+## 왜 필요한가?
 
-Different AI models have different strengths and blind spots. By asking a second model to review your code, you catch issues that a single model might miss. Oracle automates this cross-verification workflow.
+AI 모델마다 강점과 맹점이 다릅니다. 두 번째 모델에게 코드를 리뷰받으면, 한 모델이 놓칠 수 있는 문제를 잡아낼 수 있습니다. Oracle은 이 크로스 검증 워크플로우를 자동화합니다.
 
-## Prerequisites
+## 사전 준비
 
-- [Claude Code](https://claude.com/claude-code) installed
-- [Codex CLI](https://github.com/openai/codex) installed and configured with an OpenAI API key
+- [Claude Code](https://claude.com/claude-code) 설치
+- [Codex CLI](https://github.com/openai/codex) 설치 + OpenAI API 키 설정
 
 ```bash
 npm install -g @openai/codex
 ```
 
-## Install
+## 설치
 
-### Option A: Plugin (recommended)
+### 방법 A: 플러그인 (권장)
 
-Install via [Claude Code plugin system](https://docs.anthropic.com/en/docs/claude-code/plugins). Provides `/oracle:ask`.
+[Claude Code 플러그인 시스템](https://docs.anthropic.com/en/docs/claude-code/plugins)으로 설치. `/oracle:ask` 사용 가능.
 
 ```bash
-# Add marketplace
+# 마켓플레이스 추가
 /plugin marketplace add wanbok/claude-marketplace
 
-# Install plugin
+# 플러그인 설치
 /plugin install oracle@wanbok-claude-marketplace
 ```
 
-### Option B: Standalone script
+### 방법 B: 스크립트 설치
 
-Clone and run the install script. Provides `/oracle` skill + `oracle` agent.
+레포를 클론하고 설치 스크립트 실행. `/oracle` 스킬 + `oracle` 에이전트 사용 가능.
 
 ```bash
 git clone https://github.com/wanbok/oracle.git
@@ -42,80 +42,80 @@ chmod +x install.sh
 ./install.sh
 ```
 
-This symlinks the agent into `~/.claude/agents/` and the skill into `~/.claude/skills/`.
+`~/.claude/agents/`에 에이전트를, `~/.claude/skills/`에 스킬을 심링크로 설치합니다.
 
-> **Note:** Choose one install method. If the oracle plugin (Option A) is installed, it claims the `oracle` namespace and the `/oracle` local skill from Option B will not be recognized. Use `/oracle:ask` with the plugin, or `/oracle` with the standalone script — not both.
+> **주의:** 설치 방법은 하나만 선택하세요. oracle 플러그인(방법 A)이 설치되어 있으면 `oracle` 네임스페이스를 플러그인이 점유하므로, 방법 B의 `/oracle` 로컬 스킬이 인식되지 않습니다. 플러그인은 `/oracle:ask`, 스크립트는 `/oracle`로 사용하며 동시 설치는 지원하지 않습니다.
 
-## Usage
+## 사용법
 
-### As a Skill
-
-```
-/oracle Review this function for edge cases
-/oracle:ask Review this function for edge cases   # plugin install
-```
-
-Both invoke the same 5-step workflow: parse → gather context → call Codex → quality check → report.
-
-### As a Custom Agent
-
-Reference `oracle` as a `subagent_type` when spawning agents via the Task tool:
+### 스킬로 사용
 
 ```
-Task(subagent_type="oracle", prompt="Review this code for security issues: ...")
+/oracle 이 함수의 엣지 케이스를 리뷰해줘
+/oracle:ask 이 함수의 엣지 케이스를 리뷰해줘   # 플러그인 설치 시
 ```
 
-### As a Team Role
+둘 다 동일한 5단계 워크플로우를 실행합니다: 파싱 → 컨텍스트 수집 → Codex 호출 → 품질 검증 → 보고.
 
-Add `oracle` to your agent team for continuous cross-model verification during development. See [examples/team-usage.md](examples/team-usage.md).
+### 커스텀 에이전트로 사용
 
-## What It Does
+Task 도구에서 `oracle`을 `subagent_type`으로 지정:
 
 ```
-You ask a question
-       │
-       ▼
- Oracle reads the
- relevant code (Read/Grep)
-       │
-       ▼
- Constructs a prompt with
- inline code context
-       │
-       ▼
- Sends to Codex CLI
- (timeout: 180s)
-       │
-       ▼
- Quality-checks the
- Codex response
-       │
-       ▼
- Reports verified results
- back to you
+Task(subagent_type="oracle", prompt="이 코드의 보안 이슈를 검토해줘: ...")
 ```
 
-Oracle is **read-only** — it never edits your files. It only suggests; you decide what to apply.
+### 팀 역할로 사용
 
-## Backend Configuration
+에이전트 팀에 `oracle` 역할을 추가하여 개발 중 지속적인 크로스 모델 검증을 수행합니다. [examples/team-usage.md](examples/team-usage.md) 참고.
 
-Oracle uses [Codex CLI](https://github.com/openai/codex) by default, but you can swap the backend by editing the `codex exec` command in `agents/oracle.md`.
+## 동작 방식
 
-| Backend | Command | Notes |
-|---------|---------|-------|
-| **Codex CLI** (default) | `codex exec "prompt"` | Requires OpenAI API key |
-| **Ollama** | `ollama run llama3 "prompt"` | Local, free, no API key |
-| **OpenRouter** | `curl` to OpenRouter API | Multi-model access, pay-per-use |
-| **Google Gemini** | `gemini "prompt"` | Requires Google AI API key |
+```
+질문 입력
+   │
+   ▼
+Oracle이 관련 코드를
+읽음 (Read/Grep)
+   │
+   ▼
+인라인 코드 컨텍스트로
+프롬프트 구성
+   │
+   ▼
+Codex CLI로 전송
+(타임아웃: 180초)
+   │
+   ▼
+Codex 응답을
+품질 검증
+   │
+   ▼
+검증된 결과를
+보고
+```
 
-To switch backends, replace the `codex exec` pattern in `agents/oracle.md` — the "How to Call Codex" section.
+Oracle은 **읽기 전용**입니다 — 파일을 수정하지 않습니다. 제안만 하고, 적용은 사용자가 결정합니다.
 
-## Uninstall
+## 백엔드 설정
+
+기본값은 [Codex CLI](https://github.com/openai/codex)이지만, `agents/oracle.md`의 `codex exec` 명령을 수정하여 다른 백엔드로 교체할 수 있습니다.
+
+| 백엔드 | 명령어 | 비고 |
+|--------|--------|------|
+| **Codex CLI** (기본) | `codex exec "prompt"` | OpenAI API 키 필요 |
+| **Ollama** | `ollama run llama3 "prompt"` | 로컬 실행, 무료, API 키 불필요 |
+| **OpenRouter** | `curl`로 OpenRouter API 호출 | 다중 모델 접근, 종량제 |
+| **Google Gemini** | `gemini "prompt"` | Google AI API 키 필요 |
+
+백엔드를 변경하려면 `agents/oracle.md`의 "How to Call Codex" 섹션에서 `codex exec` 패턴을 교체하세요.
+
+## 제거
 
 ```bash
 ./uninstall.sh
 ```
 
-## License
+## 라이선스
 
 MIT
