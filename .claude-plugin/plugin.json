@@ -1,5 +1,5 @@
 {
-  "name": "claude-oracle",
+  "name": "oracle",
   "version": "1.0.0",
   "description": "Cross-model verification for Claude Code. Bridges Claude with Codex (GPT-5.3) for second opinions on code reviews, alternative implementations, and architectural decisions. Read-only — never edits your files.",
   "author": {
